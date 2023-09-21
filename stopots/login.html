@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Stopots</title>
+    <style>
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos globais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0004ef; /* Use cores em formato hexadecimal ou nomes de cores */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centralize verticalmente */
+}
+
+/* Estilos do container de login */
+.login-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Use rgba para sombra com transparência */
+    padding: 20px;
+    width: 300px;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+}
+
+/* Estilos dos grupos de formulário */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group button {
+    background-color: #ff3366;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Estilos de hover para botões */
+.form-group button:hover {
+    background-color: #ff1a4d; /* Cor mais escura quando o botão é hover */
+}
+    </style>
+<body>
+    <div class="login-container">
+        <h2>Stopots</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Entrar</button>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Aqui você pode adicionar a lógica de autenticação
+            // Por exemplo, verificar se o usuário e a senha estão corretos.
+            // Em um ambiente real, isso envolveria uma chamada a um servidor.
+            
+            // Se a autenticação for bem-sucedida, redirecione o usuário para a página de confirmação
+            if (username === 'usuario' && password === 'senha') {
+                // Substitua 'pagina-de-confirmacao.html' pela URL da sua página de confirmação
+                window.location.href = 'paginaconfirmacao.html';
+            } else {
+                // Caso contrário, exiba uma mensagem de erro (ou faça o que preferir)
+                alert('Usuário ou senha incorretos. Tente novamente.');
+            }
+        });
+    </script>
+</body>
+</html>
