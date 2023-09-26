@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopots Game</title>
+    <style>
+ body {
+            font-family: Arial, sans-serif;
+            background-color: blue;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin: 10px 0;
+            color: #007BFF; /* Cor personalizada */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra de texto */
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #letter {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #007BFF;
+        }
+
+        #inputWord {
+            font-size: 24px;
+            padding: 10px;
+            width: 100%;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #score {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #007BFF;
+        }
+
+        #categories {
+            font-size: 18px;
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>StopGregs Game</h1>
+        <div>
+            <p>Tempo Restante: <span id="timer">60</span> segundos</p>
+            <p>Rodada: <span id="round">1</span></p>
+        </div>
+        <div id="categories">
+            <p>Categoria: <span id="category">Animais</span></p>
+        </div>
+        <button onclick="startGame()">Iniciar Jogo</button>
+        <button onclick="generateLetter()">Gerar Letra</button>
+        <h2>Letra:</h2>
+        <div id="letter"></div>
+        <h2>Palavra:</h2>
+        <input type="text" id="inputWord" placeholder="Digite sua palavra...">
+        <button onclick="checkWord()">Verificar Palavra</button>
+        <h2>Pontuação:</h2>
+        <div id="score">0</div>
+    </div>
+
+    <script>
+        let currentLetter = '';
+        let score = 0;
+        let timer = 60;
+        let round = 1;
+        const categories = ['Animais', 'Cidades', 'Comidas', 'Filmes', 'Países'];
+        let currentCategory = '';
+
+        function startGame() {
+            document.getElementById('timer').textContent = timer;
+            document.getElementById('round').textContent = round;
+            currentCategory = categories[Math.floor(Math.random() * categories.length)];
+            document.getElementById('category').textContent = currentCategory;
+            generateLetter();
+            countdown();
+        }
+
+        function countdown() {
+            const timerElement = document.getElementById('timer');
+            const countdownInterval = setInterval(function () {
+                timer -= 1;
+                timerElement.textContent = timer;
+                if (timer <= 0) {
+                    clearInterval(countdownInterval);
+                    endRound();
+                }
+            }, 1000);
+        }
+
+        function endRound() {
+            alert('Fim da rodada! Sua pontuação: ' + score);
+            round += 1;
+            score = 0;
+            timer = 60;
+            document.getElementById('round').textContent = round;
+            document.getElementById('score').textContent = score;
+            document.getElementById('timer').textContent = timer;
+            startGame();
+        }
+
+
+        function generateLetter() {
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const randomIndex = Math.floor(Math.random() * letters.length);
+            currentLetter = letters[randomIndex];
+            document.getElementById('letter').textContent = currentLetter;
+        }
+
+        function checkWord() {
+            const inputWord = document.getElementById('inputWord').value.toUpperCase();
+            if (inputWord.startsWith(currentLetter)) {
+                score += 1;
+                document.getElementById('score').textContent = score;
+            } else {
+                alert('A palavra deve começar com a letra atual.');
+            }
+            document.getElementById('inputWord').value = '';
+            generateLetter();
+        }
+    </script>
+</body>
+</html>
