@@ -84,8 +84,8 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>StopGregs Game</h1>
+    <div class="container"> 
+        <h1>StopGregs Game</h1> 
     <div>
             <p>Tempo Restante: <span id="timer">60</span> segundos</p>
             <p>Rodada: <span id="round">1</span></p>
@@ -108,25 +108,25 @@
     </div>
 
     <script>
-        let currentLetter = '';
-        let score = 0;
-        let timer = 60;
-        let round = 1;
-        const categories = ['Animais', 'Cidades', 'Comidas', 'Filmes', 'Países'];
-        let currentCategory = '';
+        let currentLetter = ''; // Variável que irá sortear a letra do jogo.
+        let score = 0; // Variável que conta os pontos dos jogadores. 
+        let timer = 60; // Variável que conta o tempo da rodada.
+        let round = 1; // Variável que conta a rodada.
+        const categories = ['Animais', 'Cidades', 'Comidas', 'Filmes', 'Países']; // Variável de tipo constante para classificar as categorias.
+        let currentCategory = ''; // Variável que irá sortear a categoria da rodada.
 
-        function startGame() {
-            document.getElementById('timer').textContent = timer;
-            document.getElementById('round').textContent = round;
-            currentCategory = categories[Math.floor(Math.random() * categories.length)];
-            document.getElementById('category').textContent = currentCategory;
+        function startGame() { // Função para o jogo começar.
+            document.getElementById('timer').textContent = timer; // Contador de tempo.
+            document.getElementById('round').textContent = round; // Contador de rodadas.
+            currentCategory = categories[Math.floor(Math.random() * categories.length)]; // Sorteando as categorias aleatoriamente.
+            document.getElementById('category').textContent = currentCategory; // Definndo a categoria na tela.
             generateLetter();
             countdown();
         }
 
         function countdown() {
-            const timerElement = document.getElementById('timer');
-            const countdownInterval = setInterval(function () {
+            const timerElement = document.getElementById('timer'); // Colocando o tempo.
+            const countdownInterval = setInterval(function () { // Setando um intervalo.
                 timer -= 1;
                 timerElement.textContent = timer;
                 if (timer <= 0) {
@@ -137,25 +137,25 @@
         }
 
         function endRound() {
-            alert('Fim da rodada! Sua pontuação: ' + score);
-            round += 1;
+            alert('Fim da rodada! Sua pontuação: ' + score); // Ao terminar a rodada mostra sua pontuação.
+            round += 1; 
             score = 0;
             timer = 60;
             document.getElementById('round').textContent = round;
             document.getElementById('score').textContent = score;
             document.getElementById('timer').textContent = timer;
-            startGame();
+            startGame(); // Recomeça o jogo se o jogador quiser.
         }
 
 
-        function generateLetter() {
+        function generateLetter() { // Sorteador de Letras.                             
             const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             const randomIndex = Math.floor(Math.random() * letters.length);
-            currentLetter = letters[randomIndex];
+            currentLetter = letters[randomIndex]; // Adiciona a variavel.
             document.getElementById('letter').textContent = currentLetter;
         }
 
-        function checkWord() {
+        function checkWord() { // Corrige a palavra, se a palavra estiver correta conta 1 ponto.
             const inputWord = document.getElementById('inputWord').value.toUpperCase();
             if (inputWord.startsWith(currentLetter)) {
                 score += 1;
